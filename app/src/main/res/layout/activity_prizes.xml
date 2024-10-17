@@ -47,8 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rouletteWheel"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="624dp"
         android:text="Spin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
