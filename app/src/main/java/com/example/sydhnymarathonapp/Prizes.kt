@@ -46,10 +46,10 @@ class Prizes : AppCompatActivity() {
     }
 
     private fun startSpin() {
-        val randomAngle = Random.nextFloat() * 360f
+        val randomAngle = 720 + Random.nextFloat() * 360f
         val handler = Handler(Looper.getMainLooper())
         var currentAngle = 0f
-        val updateInterval = 10L // milliseconds
+        val updateInterval = 1L // milliseconds
 
         handler.post(object : Runnable {
             override fun run() {
