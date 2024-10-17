@@ -3,8 +3,8 @@
     <shape xmlns:android="http://schemas.android.com/apk/res/android"
         android:shape="oval">
         <size
-            android:width="1000dp"
-            android:height="1000dp"/>
+            android:width="100dp"
+            android:height="100dp"/>
         <solid android:color="#801212"/> <!-- Цвет круга -->
     </shape>
 <!--</selector>-->
