@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import kotlin.random.Random
 
 class Prizes : AppCompatActivity() {
@@ -46,7 +47,7 @@ class Prizes : AppCompatActivity() {
     }
 
     private fun startSpin() {
-        val randomAngle = 720 + Random.nextFloat() * 360f
+        val randomAngle = 1080 + Random.nextFloat() * 360f
         val handler = Handler(Looper.getMainLooper())
         var currentAngle = 0f
         val updateInterval = 1L // milliseconds
@@ -60,14 +61,14 @@ class Prizes : AppCompatActivity() {
                 } else {
                     // Spin finished, determine result
                     val section = ((randomAngle % 360) / (360 / rouletteWheel.labels.size)).toInt()
-//                    showResult(section)
+                    showResult(section)
                 }
             }
         })
     }
 
-//    private fun showResult(section: Int) {
-//        Toast.makeText(this, "Result: ${rouletteWheel.labels[section]}", Toast.LENGTH_SHORT).show()
-//    }
+    private fun showResult(section: Int) {
+        Toast.makeText(this, "Result: ${rouletteWheel.labels[section]}", Toast.LENGTH_SHORT).show()
+    }
 
 }
