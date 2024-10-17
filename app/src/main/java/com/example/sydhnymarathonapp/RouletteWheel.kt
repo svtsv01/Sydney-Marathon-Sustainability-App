@@ -52,6 +52,7 @@ class RouletteWheel(context: Context, attrs: AttributeSet) : View(context, attrs
         }
     }
 
+
     // Method to update rotation angle and redraw
     fun rotateWheel(newAngle: Float) {
         rotationAngle = newAngle

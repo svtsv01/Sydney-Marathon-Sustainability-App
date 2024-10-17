@@ -43,7 +43,7 @@ class Prizes : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)  // Запускаем новое Activity
         }
-
+        PointsManager.updateActionBarPoints(this)
     }
 
     private fun startSpin() {

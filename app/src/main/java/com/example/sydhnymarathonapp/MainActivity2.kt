@@ -18,8 +18,12 @@ class MainActivity2 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
         // Находим кнопку по ее ID
         val buttonScannerBack: Button = findViewById(R.id.button3)
+
+        PointsManager.updateActionBarPoints(this)
 
         // Устанавливаем действие на кнопку
         buttonScannerBack.setOnClickListener {

@@ -18,42 +18,33 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
+            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
         )
 
-        // Находим кнопку по ее ID
-        val buttonToScanner: Button = findViewById(R.id.button)
-
-        // Устанавливаем действие на кнопку
-        buttonToScanner.setOnClickListener {
-            // Создаем Intent для перехода на DashboardActivity
-            val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent)  // Запускаем новое Activity
-        }
-
-        // Находим кнопку по ее ID
-        val buttonToPrizes: Button = findViewById(R.id.button2)
-
-        // Устанавливаем действие на кнопку
-        buttonToPrizes.setOnClickListener {
-            // Создаем Intent для перехода на DashboardActivity
-            val intent = Intent(this, Prizes::class.java)
-            startActivity(intent)  // Запускаем новое Activity
-        }
-
         setupActionBarWithNavController(navController, appBarConfiguration)
-        //navView.setupWithNavController(navController)
+
+        // Optionally set a custom title for the ActionBar
+        PointsManager.setPoints(10)
+
+        // Update ActionBar to show points
+        PointsManager.updateActionBarPoints(this)
+
+        // Button listeners for Scanner and Prizes Activities
+        val buttonToScanner: Button = findViewById(R.id.button)
+        buttonToScanner.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+
+        val buttonToPrizes: Button = findViewById(R.id.button2)
+        buttonToPrizes.setOnClickListener {
+            val intent = Intent(this, Prizes::class.java)
+            startActivity(intent)
+        }
     }
 }
