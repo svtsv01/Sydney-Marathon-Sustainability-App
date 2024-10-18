@@ -52,7 +52,7 @@ class Prizes: AppCompatActivity() {
         buttonScannerBack.setOnClickListener {
             // Создаем Intent для перехода на DashboardActivity
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)  // Запускаем новое Activity
+            startActivity(intent)
         }
         setupView()
     }
