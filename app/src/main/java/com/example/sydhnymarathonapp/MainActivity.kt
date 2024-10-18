@@ -10,6 +10,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.sydhnymarathonapp.databinding.ActivityMainBinding
 import android.widget.Button
 import android.content.Intent
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
+import android.util.Log
+import android.widget.EditText
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +25,58 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Sample array of pairs (Route, Emission)
+        val routeEmissionList = listOf(
+            Pair("Route A", 120),
+            Pair("Route B", 150),
+            Pair("Route C", 80),
+            Pair("Route D", 200),
+            Pair("Route E", 300),
+            Pair("Route E", 300)
+        )
+
+        // Sort by route in descending order
+        val sortedList = routeEmissionList.sortedBy{ it.second }
+
+        // Get reference to the TableLayout
+        val tableLayout: TableLayout = findViewById(R.id.tableLayout)
+
+        // Populate table dynamically
+        for (pair in sortedList) {
+            val tableRow = TableRow(this)
+
+            // Create TextView for the Route
+            val routeTextView = TextView(this)
+            routeTextView.text = pair.first
+            routeTextView.setPadding(8, 8, 8, 8)
+
+            // Create TextView for the Emission
+            val emissionTextView = TextView(this)
+            emissionTextView.text = pair.second.toString()
+            emissionTextView.setPadding(8, 8, 8, 8)
+
+            // Add TextViews to the TableRow
+            tableRow.addView(routeTextView)
+            tableRow.addView(emissionTextView)
+
+            // Add TableRow to TableLayout
+            tableLayout.addView(tableRow)
+        }
+
+        val address1EditText: EditText = findViewById(R.id.address1)
+        val address2EditText: EditText = findViewById(R.id.address2)
+        val submitButton: Button = findViewById(R.id.submitButton)
+
+        // Handle Submit Button Click
+        submitButton.setOnClickListener {
+            val address1 = address1EditText.text.toString()
+            val address2 = address2EditText.text.toString()
+
+            // Log the entered values to the console
+            Log.d("MainActivity", "Entered Address 1: $address1")
+            Log.d("MainActivity", "Entered Address 2: $address2")
+        }
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
