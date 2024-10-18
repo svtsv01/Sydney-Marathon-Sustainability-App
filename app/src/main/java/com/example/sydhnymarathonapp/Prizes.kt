@@ -1,98 +1,83 @@
 package com.example.sydhnymarathonapp
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.os.Handler
-import android.os.Looper
-import android.widget.Toast
-import kotlin.math.floor
-import kotlin.random.Random
+import com.example.sydhnymarathonapp.R
+import com.example.sydhnymarathonapp.RotateListener
+import com.example.sydhnymarathonapp.Roulette
+import android.widget.Button
+import android.widget.TextView
 
-class Prizes : AppCompatActivity() {
-    private lateinit var rouletteWheel: RouletteWheel
-    private lateinit var spinButton: Button
-    private var currentRotation = 0f // Track the current rotation angle of the wheel
+class Prizes: AppCompatActivity() {
+
+    private lateinit var roulette: Roulette
+    private lateinit var rotateResultTv: TextView
+    private lateinit var rouletteSizeTv: TextView
+    private lateinit var sizePlusBtn: Button
+    private lateinit var sizeMinusBtn: Button
+    private lateinit var rotateBtn: Button
+
+    private val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
+
+    @SuppressLint("SetTextI18n")
+    private val rouletteListener = object : RotateListener {
+        override fun onRotateStart() {
+            rotateResultTv.text = "Result : "
+        }
+
+        override fun onRotateEnd(result: String) {
+            rotateResultTv.text = "Result : $result"
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_prizes)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        // Initialize views
+        roulette = findViewById(R.id.roulette)
+        rotateResultTv = findViewById(R.id.rotate_result_tv)
+        rouletteSizeTv = findViewById(R.id.roulette_size_tv)
+//        sizePlusBtn = findViewById(R.id.sizePlusBtn)
+//        sizeMinusBtn = findViewById(R.id.sizeMinusBtn)
+        rotateBtn = findViewById(R.id.rotate_btn)
 
-        rouletteWheel = findViewById(R.id.rouletteWheel)
-        spinButton = findViewById(R.id.spinButton)
-
-        spinButton.setOnClickListener {
-            startSpin()
-        }
-
-        // Back button logic
-        val buttonScannerBack: Button = findViewById(R.id.button3)
-        buttonScannerBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        PointsManager.updateActionBarPoints(this)
+        setupView()
     }
 
-    private fun startSpin() {
-        // Total spin will be 3 to 5 full rotations + some random final angle
-        val randomAngle = (Random.nextInt(3, 6) * 360) + Random.nextFloat() * 360f
-        val handler = Handler(Looper.getMainLooper())
-        val totalDuration = 3000L // Total spin time in milliseconds
-        val startTime = System.currentTimeMillis()
+    private fun setupView() {
+        roulette.apply {
+            rouletteSize = Roulette.ROULETTE_MAX_SIZE
+            rouletteSizeTv.text = rouletteSize.toString()
+            setRouletteDataList(rouletteData)
+        }
 
-        spinButton.isEnabled = false // Disable button during spin
-
-        handler.post(object : Runnable {
-            override fun run() {
-                val elapsedTime = System.currentTimeMillis() - startTime
-                if (elapsedTime < totalDuration) {
-                    val progress = elapsedTime / totalDuration.toFloat()
-                    val easedProgress = (1 - (1 - progress) * (1 - progress)) // Ease out function
-                    val currentAngle = easedProgress * randomAngle
-                    rouletteWheel.rotateWheel(currentRotation + currentAngle)
-                    handler.postDelayed(this, 16L) // Approx 60 FPS
-                } else {
-                    spinButton.isEnabled = true // Enable button after spin
-
-                    // After the spin is done, we calculate the new rotation angle of the wheel
-                    currentRotation = (currentRotation + randomAngle) % 360 // Update current rotation angle
-
-                    // Determine the winning section based on the final rotation
-                    val winningSection = getWinningSection(currentRotation)
-                    showResult(winningSection)
-                }
-            }
-        })
+//        sizePlusBtn.setOnClickListener { plusRouletteSize() }
+//        sizeMinusBtn.setOnClickListener { minusRouletteSize() }
+        rotateBtn.setOnClickListener { rotateRoulette() }
     }
 
-    // Method to determine which section is at the top based on the final spin angle
-    private fun getWinningSection(finalAngle: Float): Int {
-        // Normalize the angle (remove complete rotations and ensure it's between 0 and 360)
-        val normalizedAngle = (finalAngle % 360 + 360) % 360
-
-        // Calculate the section size in degrees
-        val sectionAngle = 360f / rouletteWheel.labels.size
-
-        // Determine the section that aligns with the top (0-degree position)
-        val winningSection = floor(normalizedAngle / sectionAngle).toInt()
-
-        return winningSection
+    private fun rotateRoulette() {
+        val toDegrees = (2000..10000).random().toFloat()
+        roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
     }
 
-    private fun showResult(section: Int) {
-        Toast.makeText(this, "Result: ${rouletteWheel.labels[section]}", Toast.LENGTH_SHORT).show()
-        println("Winning Section: ${section + 1}") // Print the winning section to the console
+    private fun plusRouletteSize() {
+        var rouletteSize = roulette.rouletteSize
+        if (rouletteSize == Roulette.ROULETTE_MAX_SIZE) return
+
+        roulette.rouletteSize = ++rouletteSize
+        rouletteSizeTv.text = rouletteSize.toString()
+    }
+
+    private fun minusRouletteSize() {
+        if (roulette.isRotate) return
+
+        var rouletteSize = roulette.rouletteSize
+        if (rouletteSize == Roulette.ROULETTE_MIN_SIZE) return
+
+        roulette.rouletteSize = --rouletteSize
+        rouletteSizeTv.text = rouletteSize.toString()
     }
 }
