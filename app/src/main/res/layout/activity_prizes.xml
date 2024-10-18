@@ -8,15 +8,15 @@
     tools:context=".Prizes">
 
     <TextView
-    android:id="@+id/rotate_result_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Result : "
-    android:textSize="20sp"
-    android:layout_marginStart="10dp"
-    app:layout_constraintBottom_toTopOf="@+id/roulette"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/rotate_result_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Result : "
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/roulette"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/size_plus_btn"
@@ -54,26 +54,39 @@
         android:id="@+id/roulette"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:rouletteSize="6"
-        app:rouletteTextSize="25sp"
-        app:rouletteTextColor="@android:color/black"
-        app:topMarkerColor="@color/black"
-        app:topMarkerVisibility="invisible"
         app:emptyMessage="Jhdroid"
         app:layout_constraintBottom_toTopOf="@+id/rotate_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roulette_size_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/roulette_size_tv"
+        app:rouletteSize="6"
+        app:rouletteTextColor="@android:color/black"
+        app:rouletteTextSize="25sp"
+        app:topMarkerColor="@color/black"
+        app:topMarkerVisibility="invisible" />
 
-<!--    app:centerPointColor="@color/color004297"-->
+    <!--    app:centerPointColor="@color/color004297"-->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rotate_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="575dp"
+        android:layout_marginBottom="108dp"
         android:text="rotate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="612dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

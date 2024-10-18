@@ -1,6 +1,7 @@
 package com.example.sydhnymarathonapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sydhnymarathonapp.R
@@ -8,6 +9,7 @@ import com.example.sydhnymarathonapp.RotateListener
 import com.example.sydhnymarathonapp.Roulette
 import android.widget.Button
 import android.widget.TextView
+
 
 class Prizes: AppCompatActivity() {
 
@@ -43,6 +45,15 @@ class Prizes: AppCompatActivity() {
 //        sizeMinusBtn = findViewById(R.id.sizeMinusBtn)
         rotateBtn = findViewById(R.id.rotate_btn)
 
+        val buttonScannerBack: Button = findViewById(R.id.button3)
+
+        PointsManager.updateActionBarPoints(this)
+
+        buttonScannerBack.setOnClickListener {
+            // Создаем Intent для перехода на DashboardActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)  // Запускаем новое Activity
+        }
         setupView()
     }
 
@@ -52,6 +63,7 @@ class Prizes: AppCompatActivity() {
             rouletteSizeTv.text = rouletteSize.toString()
             setRouletteDataList(rouletteData)
         }
+        PointsManager.updateActionBarPoints(this) // added Points display
 
 //        sizePlusBtn.setOnClickListener { plusRouletteSize() }
 //        sizeMinusBtn.setOnClickListener { minusRouletteSize() }
@@ -80,4 +92,5 @@ class Prizes: AppCompatActivity() {
         roulette.rouletteSize = --rouletteSize
         rouletteSizeTv.text = rouletteSize.toString()
     }
+
 }
