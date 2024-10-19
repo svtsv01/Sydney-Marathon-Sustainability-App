@@ -2,7 +2,7 @@ package com.example.sydhnymarathonapp
 import androidx.appcompat.app.AppCompatActivity
 
 object PointsManager {
-    var points: Int = 0
+    var points: Int = 40
         private set
 
     fun setPoints(value: Int) {

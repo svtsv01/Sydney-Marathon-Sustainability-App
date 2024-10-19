@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         // Optionally set a custom title for the ActionBar
-        PointsManager.setPoints(10)
+//        PointsManager.setPoints(10)
 
         // Update ActionBar to show points
         PointsManager.updateActionBarPoints(this)

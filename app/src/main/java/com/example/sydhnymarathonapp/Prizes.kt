@@ -9,6 +9,7 @@ import com.example.sydhnymarathonapp.RotateListener
 import com.example.sydhnymarathonapp.Roulette
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 
 class Prizes: AppCompatActivity() {
@@ -67,30 +68,39 @@ class Prizes: AppCompatActivity() {
 
 //        sizePlusBtn.setOnClickListener { plusRouletteSize() }
 //        sizeMinusBtn.setOnClickListener { minusRouletteSize() }
-        rotateBtn.setOnClickListener { rotateRoulette() }
+        rotateBtn.setOnClickListener {
+            if (PointsManager.points < 20) {
+                Toast.makeText(this, "Not enough points!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                rotateRoulette()
+            }
+        }
     }
 
     private fun rotateRoulette() {
+        PointsManager.subPoints(20)
+        PointsManager.updateActionBarPoints(this)
         val toDegrees = (2000..10000).random().toFloat()
         roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
     }
 
-    private fun plusRouletteSize() {
-        var rouletteSize = roulette.rouletteSize
-        if (rouletteSize == Roulette.ROULETTE_MAX_SIZE) return
-
-        roulette.rouletteSize = ++rouletteSize
-        rouletteSizeTv.text = rouletteSize.toString()
-    }
-
-    private fun minusRouletteSize() {
-        if (roulette.isRotate) return
-
-        var rouletteSize = roulette.rouletteSize
-        if (rouletteSize == Roulette.ROULETTE_MIN_SIZE) return
-
-        roulette.rouletteSize = --rouletteSize
-        rouletteSizeTv.text = rouletteSize.toString()
-    }
+//    private fun plusRouletteSize() {
+//        var rouletteSize = roulette.rouletteSize
+//        if (rouletteSize == Roulette.ROULETTE_MAX_SIZE) return
+//
+//        roulette.rouletteSize = ++rouletteSize
+//        rouletteSizeTv.text = rouletteSize.toString()
+//    }
+//
+//    private fun minusRouletteSize() {
+//        if (roulette.isRotate) return
+//
+//        var rouletteSize = roulette.rouletteSize
+//        if (rouletteSize == Roulette.ROULETTE_MIN_SIZE) return
+//
+//        roulette.rouletteSize = --rouletteSize
+//        rouletteSizeTv.text = rouletteSize.toString()
+//    }
 
 }
