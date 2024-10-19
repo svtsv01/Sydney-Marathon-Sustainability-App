@@ -56,6 +56,8 @@
         android:layout_marginTop="575dp"
         android:layout_marginBottom="108dp"
         android:text="rotate"
+        android:backgroundTint="#6dcff6"
+        android:radius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="632dp"
+        android:backgroundTint="#6dcff6"
+        android:radius="32dp"
         android:text="Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

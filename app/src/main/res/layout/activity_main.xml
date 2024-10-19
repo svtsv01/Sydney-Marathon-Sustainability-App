@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
@@ -20,10 +19,12 @@
 
         />
 
+
     <LinearLayout
         android:id="@+id/topSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@android:color/black"
         android:orientation="vertical"
         android:padding="8dp"
@@ -33,64 +34,80 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- Title Text -->
+
+        <!-- Input Fields for Addresses -->
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose the most sustainable way to get to the marathon?"
+            android:layout_height="58dp"
+            android:text="How will you get there?\nChoose more sustainable way?"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:visibility="visible"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"/>
 
-        <!-- Input Fields for Addresses -->
         <EditText
             android:id="@+id/address1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_search"
             android:hint="Enter your address"
             android:inputType="text"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray" />
 
+        <!-- Submit Button -->
         <EditText
             android:id="@+id/address2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_search"
             android:hint="Enter your destination"
             android:inputType="text"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray" />
 
-        <!-- Submit Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
-            android:text="Submit" />
-    </LinearLayout>
+            android:backgroundTint="#6dcff6"
+            android:radius="32dp"
+            android:text="Search" />
 
+
+    </LinearLayout>
 
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="232dp"
         android:padding="16dp"
         android:stretchColumns="1"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"> <!-- Скрываем таблицу изначально -->
 
         <!-- Header Row -->
         <TableRow>
-
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Route"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
             <TextView
@@ -98,12 +115,11 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Emission"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
-
         </TableRow>
 
     </TableLayout>
-
 
     <LinearLayout
         android:id="@+id/recyclingSection"
@@ -112,30 +128,30 @@
         android:background="@android:color/black"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tableLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tableLayout"> <!-- Привязка к нижней части таблицы -->
 
         <!-- Section Title -->
         <TextView
             android:id="@+id/recycling_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Come to collecting places for recycling"
             android:layout_marginBottom="10dp"
+            android:text="Come to collecting places for recycling"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white" />
-
-        <!-- Google Map Fragment -->
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button
+        android:backgroundTint="#6dcff6"
+        android:radius="32dp"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="624dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="680dp"
         android:text="Scanner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -146,6 +162,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginBottom="2dp"
+        android:backgroundTint="#6dcff6"
+        android:radius="32dp"
         android:text="Prize Draw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

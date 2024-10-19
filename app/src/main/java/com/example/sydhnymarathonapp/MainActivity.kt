@@ -15,7 +15,9 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.util.Log
 import android.widget.EditText
-
+import android.animation.ObjectAnimator
+import android.view.View
+import android.widget.LinearLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,16 +35,21 @@ class MainActivity : AppCompatActivity() {
             Pair("Route C", 80),
             Pair("Route D", 200),
             Pair("Route E", 300),
-            Pair("Route E", 300)
+            Pair("Route F", 300)
         )
 
-        // Sort by route in descending order
-        val sortedList = routeEmissionList.sortedBy{ it.second }
+        // Sort by emission in ascending order
+        val sortedList = routeEmissionList.sortedBy { it.second }
 
-        // Get reference to the TableLayout
+        // Get references to the TableLayout and LinearLayout
         val tableLayout: TableLayout = findViewById(R.id.tableLayout)
+        val recyclingSection: LinearLayout = findViewById(R.id.recyclingSection)
 
-        // Populate table dynamically
+        // Set initial visibility to GONE
+        tableLayout.visibility = View.GONE
+        recyclingSection.visibility = View.GONE
+
+        // Populate table dynamically but keep it hidden at first
         for (pair in sortedList) {
             val tableRow = TableRow(this)
 
@@ -50,11 +57,13 @@ class MainActivity : AppCompatActivity() {
             val routeTextView = TextView(this)
             routeTextView.text = pair.first
             routeTextView.setPadding(8, 8, 8, 8)
+            routeTextView.setTextColor(resources.getColor(android.R.color.white))
 
             // Create TextView for the Emission
             val emissionTextView = TextView(this)
             emissionTextView.text = pair.second.toString()
             emissionTextView.setPadding(8, 8, 8, 8)
+            emissionTextView.setTextColor(resources.getColor(android.R.color.white))
 
             // Add TextViews to the TableRow
             tableRow.addView(routeTextView)
@@ -64,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             tableLayout.addView(tableRow)
         }
 
+        // References to EditText and Button
         val address1EditText: EditText = findViewById(R.id.address1)
         val address2EditText: EditText = findViewById(R.id.address2)
         val submitButton: Button = findViewById(R.id.submitButton)
@@ -76,20 +86,26 @@ class MainActivity : AppCompatActivity() {
             // Log the entered values to the console
             Log.d("MainActivity", "Entered Address 1: $address1")
             Log.d("MainActivity", "Entered Address 2: $address2")
+
+            // Make the table visible with animation
+            tableLayout.visibility = View.VISIBLE
+            val tableAlphaAnimator = ObjectAnimator.ofFloat(tableLayout, "alpha", 0f, 1f)
+            tableAlphaAnimator.duration = 1000 // Duration of animation in milliseconds
+            tableAlphaAnimator.start()
+
+            // Make the recycling section visible after the table is shown
+            recyclingSection.visibility = View.VISIBLE
+            val recyclingAlphaAnimator = ObjectAnimator.ofFloat(recyclingSection, "alpha", 0f, 1f)
+            recyclingAlphaAnimator.duration = 1000
+            recyclingAlphaAnimator.start()
         }
 
+        // Navigation setup
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
         )
-
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Optionally set a custom title for the ActionBar
-//        PointsManager.setPoints(10)
-
-        // Update ActionBar to show points
-        PointsManager.updateActionBarPoints(this)
 
         // Button listeners for Scanner and Prizes Activities
         val buttonToScanner: Button = findViewById(R.id.button)
