@@ -41,7 +41,7 @@ class Prizes: AppCompatActivity() {
         // Initialize views
         roulette = findViewById(R.id.roulette)
         rotateResultTv = findViewById(R.id.rotate_result_tv)
-        rouletteSizeTv = findViewById(R.id.roulette_size_tv)
+//        rouletteSizeTv = findViewById(R.id.roulette_size_tv)
 //        sizePlusBtn = findViewById(R.id.sizePlusBtn)
 //        sizeMinusBtn = findViewById(R.id.sizeMinusBtn)
         rotateBtn = findViewById(R.id.rotate_btn)
@@ -60,8 +60,7 @@ class Prizes: AppCompatActivity() {
 
     private fun setupView() {
         roulette.apply {
-            rouletteSize = Roulette.ROULETTE_MAX_SIZE
-            rouletteSizeTv.text = rouletteSize.toString()
+            rouletteSize = 8
             setRouletteDataList(rouletteData)
         }
         PointsManager.updateActionBarPoints(this) // added Points display
