@@ -10,27 +10,35 @@ import com.example.sydhnymarathonapp.Roulette
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.util.Log
 
 
 class Prizes: AppCompatActivity() {
 
     private lateinit var roulette: Roulette
-    private lateinit var rotateResultTv: TextView
-    private lateinit var rouletteSizeTv: TextView
-    private lateinit var sizePlusBtn: Button
-    private lateinit var sizeMinusBtn: Button
+//    private lateinit var rotateResultTv: TextView
+//    private lateinit var rouletteSizeTv: TextView
+//    private lateinit var sizePlusBtn: Button
+//    private lateinit var sizeMinusBtn: Button
     private lateinit var rotateBtn: Button
 
     private val rouletteData = listOf("TCS", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 
+    private var rotationResult: String? = null
+    private var resultText: String? = null
+
     @SuppressLint("SetTextI18n")
     private val rouletteListener = object : RotateListener {
         override fun onRotateStart() {
-            rotateResultTv.text = "Result : "
+            resultText = "Result : "
         }
 
         override fun onRotateEnd(result: String) {
-            rotateResultTv.text = "Result : $result"
+            resultText = "Result : $result"
+
+            rotationResult = result
+
+            println(rotationResult)
         }
     }
 
@@ -40,7 +48,7 @@ class Prizes: AppCompatActivity() {
 
         // Initialize views
         roulette = findViewById(R.id.roulette)
-        rotateResultTv = findViewById(R.id.rotate_result_tv)
+//        rotateResultTv = findViewById(R.id.rotate_result_tv)
 //        rouletteSizeTv = findViewById(R.id.roulette_size_tv)
 //        sizePlusBtn = findViewById(R.id.sizePlusBtn)
 //        sizeMinusBtn = findViewById(R.id.sizeMinusBtn)
