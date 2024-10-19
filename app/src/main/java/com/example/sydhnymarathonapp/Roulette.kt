@@ -166,7 +166,6 @@ class Roulette @JvmOverloads constructor(
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (canvas == null) return
 
         val shorterLength = min(right, height)
 
