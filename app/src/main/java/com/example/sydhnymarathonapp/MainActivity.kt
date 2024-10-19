@@ -19,6 +19,11 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.widget.LinearLayout
 
+import android.graphics.Color
+import android.view.animation.AlphaAnimation
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,96 +33,96 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Sample array of pairs (Route, Emission)
-        val routeEmissionList = listOf(
-            Pair("Route A", 120),
-            Pair("Route B", 150),
-            Pair("Route C", 80),
-            Pair("Route D", 200),
-            Pair("Route E", 300),
-            Pair("Route F", 300)
-        )
-
-        // Sort by emission in ascending order
-        val sortedList = routeEmissionList.sortedBy { it.second }
-
-        // Get references to the TableLayout and LinearLayout
-        val tableLayout: TableLayout = findViewById(R.id.tableLayout)
-        val recyclingSection: LinearLayout = findViewById(R.id.recyclingSection)
-
-        // Set initial visibility to GONE
-        tableLayout.visibility = View.GONE
-        recyclingSection.visibility = View.GONE
-
-        // Populate table dynamically but keep it hidden at first
-        for (pair in sortedList) {
-            val tableRow = TableRow(this)
-
-            // Create TextView for the Route
-            val routeTextView = TextView(this)
-            routeTextView.text = pair.first
-            routeTextView.setPadding(8, 8, 8, 8)
-            routeTextView.setTextColor(resources.getColor(android.R.color.white))
-
-            // Create TextView for the Emission
-            val emissionTextView = TextView(this)
-            emissionTextView.text = pair.second.toString()
-            emissionTextView.setPadding(8, 8, 8, 8)
-            emissionTextView.setTextColor(resources.getColor(android.R.color.white))
-
-            // Add TextViews to the TableRow
-            tableRow.addView(routeTextView)
-            tableRow.addView(emissionTextView)
-
-            // Add TableRow to TableLayout
-            tableLayout.addView(tableRow)
-        }
-
-        // References to EditText and Button
-        val address1EditText: EditText = findViewById(R.id.address1)
-        val address2EditText: EditText = findViewById(R.id.address2)
-        val submitButton: Button = findViewById(R.id.submitButton)
-
-        // Handle Submit Button Click
-        submitButton.setOnClickListener {
-            val address1 = address1EditText.text.toString()
-            val address2 = address2EditText.text.toString()
-
-            // Log the entered values to the console
-            Log.d("MainActivity", "Entered Address 1: $address1")
-            Log.d("MainActivity", "Entered Address 2: $address2")
-
-            // Make the table visible with animation
-            tableLayout.visibility = View.VISIBLE
-            val tableAlphaAnimator = ObjectAnimator.ofFloat(tableLayout, "alpha", 0f, 1f)
-            tableAlphaAnimator.duration = 1000 // Duration of animation in milliseconds
-            tableAlphaAnimator.start()
-
-            // Make the recycling section visible after the table is shown
-            recyclingSection.visibility = View.VISIBLE
-            val recyclingAlphaAnimator = ObjectAnimator.ofFloat(recyclingSection, "alpha", 0f, 1f)
-            recyclingAlphaAnimator.duration = 1000
-            recyclingAlphaAnimator.start()
-        }
-
-        // Navigation setup
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Button listeners for Scanner and Prizes Activities
+        // References to Buttons
         val buttonToScanner: Button = findViewById(R.id.button)
+        val buttonToPrizeDraw: Button = findViewById(R.id.button2)
+
+        // Handle Scanner Button Click
         buttonToScanner.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
         }
 
-        val buttonToPrizes: Button = findViewById(R.id.button2)
-        buttonToPrizes.setOnClickListener {
-            val intent = Intent(this, Prizes::class.java)
+        // Handle Prize Draw Button Click
+        buttonToPrizeDraw.setOnClickListener {
+            val intent = Intent(this,  Prizes::class.java)
             startActivity(intent)
+        }
+
+
+        // Sample array of pairs (Route, Emission)
+        val routeEmissionList = listOf(
+            Pair("Route - 1", 80),
+            Pair("Route - 2", 9012),
+            Pair("Route - 23", 901),
+            Pair("Route - 212", 9012),
+            Pair("Route - 3", 100)
+        )
+
+        val tableLayout: TableLayout = findViewById(R.id.tableLayout)
+        val recyclingSection: LinearLayout = findViewById(R.id.recyclingSection)
+
+        val sortedList = routeEmissionList.sortedBy{ it.second }
+
+        val minEmission = sortedList.minByOrNull { it.second }?.second ?: 0
+        val maxEmission = sortedList.maxByOrNull { it.second }?.second ?: 0
+
+        for (pair in sortedList) {
+            val tableRow = TableRow(this)
+
+            val backgroundColor = when (pair.second) {
+                minEmission -> "#A8E6CF"
+                maxEmission -> "#FFD97D"
+                else -> "#FFD97D"
+            }
+            tableRow.setBackgroundColor(Color.parseColor(backgroundColor))
+
+
+            val routeTextView = TextView(this)
+            routeTextView.text = pair.first
+            routeTextView.setPadding(8, 8, 8, 8)
+            routeTextView.setTextColor(Color.DKGRAY)
+            routeTextView.layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+
+            val emissionTextView = TextView(this)
+            emissionTextView.text = pair.second.toString()
+            emissionTextView.setPadding(8, 8, 8, 8)
+            emissionTextView.setTextColor(Color.DKGRAY)
+            emissionTextView.layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+
+            tableRow.addView(routeTextView)
+            tableRow.addView(emissionTextView)
+            tableLayout.addView(tableRow)
+        }
+
+
+        val submitButton: Button = findViewById(R.id.submitButton)
+
+
+        submitButton.setOnClickListener {
+
+            val animation = AlphaAnimation(0.0f, 1.0f)
+            animation.duration = 1000
+            tableLayout.startAnimation(animation)
+            tableLayout.visibility = View.VISIBLE
+
+
+            val constraintLayout = findViewById<ConstraintLayout>(R.id.constraintLayout) // Root layout ID
+            val constraintSet = ConstraintSet()
+            constraintSet.clone(constraintLayout)
+
+
+            constraintSet.clear(R.id.recyclingSection, ConstraintSet.TOP)
+            constraintSet.connect(
+                R.id.recyclingSection,
+                ConstraintSet.TOP,
+                R.id.tableLayout,
+                ConstraintSet.BOTTOM,
+                10
+            )
+
+
+            constraintSet.applyTo(constraintLayout)
         }
     }
 }
