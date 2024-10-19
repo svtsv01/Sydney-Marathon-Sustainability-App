@@ -50,22 +50,34 @@
         app:layout_constraintEnd_toStartOf="@+id/roulette_size_tv"
         app:layout_constraintTop_toTopOf="@+id/roulette_size_tv" />
 
+    <!--    app:centerPointColor="@color/color004297"-->
+
     <com.example.sydhnymarathonapp.Roulette
         android:id="@+id/roulette"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="426dp"
+        android:layout_height="394dp"
         app:emptyMessage="Jhdroid"
         app:layout_constraintBottom_toTopOf="@+id/rotate_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roulette_size_tv"
+        app:layout_constraintVertical_bias="0.548"
         app:rouletteSize="6"
         app:rouletteTextColor="@android:color/black"
         app:rouletteTextSize="25sp"
         app:topMarkerColor="@color/black"
         app:topMarkerVisibility="invisible" />
 
-    <!--    app:centerPointColor="@color/color004297"-->
+    <View
+        android:id="@+id/top_marker"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="112dp"
+        android:background="@drawable/triangle_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rotate_btn"

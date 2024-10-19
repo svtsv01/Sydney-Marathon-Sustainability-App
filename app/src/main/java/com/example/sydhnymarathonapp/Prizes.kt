@@ -20,7 +20,7 @@ class Prizes: AppCompatActivity() {
     private lateinit var sizeMinusBtn: Button
     private lateinit var rotateBtn: Button
 
-    private val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
+    private val rouletteData = listOf("TCS", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 
     @SuppressLint("SetTextI18n")
     private val rouletteListener = object : RotateListener {
