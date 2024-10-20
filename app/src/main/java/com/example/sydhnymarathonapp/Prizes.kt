@@ -16,7 +16,7 @@ import android.util.Log
 class Prizes: AppCompatActivity() {
 
     private lateinit var roulette: Roulette
-//    private lateinit var rotateResultTv: TextView
+    private lateinit var rotateResultTv: TextView
 //    private lateinit var rouletteSizeTv: TextView
 //    private lateinit var sizePlusBtn: Button
 //    private lateinit var sizeMinusBtn: Button
@@ -30,11 +30,11 @@ class Prizes: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private val rouletteListener = object : RotateListener {
         override fun onRotateStart() {
-            resultText = "Result : "
+            rotateResultTv.text = "Result : "
         }
 
         override fun onRotateEnd(result: String) {
-            resultText = "Result : $result"
+            rotateResultTv.text = "Result : $result"
 
             rotationResult = result
 
@@ -48,7 +48,7 @@ class Prizes: AppCompatActivity() {
 
         // Initialize views
         roulette = findViewById(R.id.roulette)
-//        rotateResultTv = findViewById(R.id.rotate_result_tv)
+        rotateResultTv = findViewById(R.id.rotate_result_tv)
 //        rouletteSizeTv = findViewById(R.id.roulette_size_tv)
 //        sizePlusBtn = findViewById(R.id.sizePlusBtn)
 //        sizeMinusBtn = findViewById(R.id.sizeMinusBtn)
