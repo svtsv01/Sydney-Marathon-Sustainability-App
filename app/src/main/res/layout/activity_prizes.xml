@@ -10,7 +10,7 @@
     <!--    app:centerPointColor="@color/color004297"-->
 
     <TextView
-        android:id="@+id/rotate_result_tv2"
+        android:id="@+id/rotate_result_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -21,17 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/rotate_result_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="48dp"
-        android:text="Cost of spin: 20 points"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.sydhnymarathonapp.Roulette
         android:id="@+id/roulette"
@@ -68,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="575dp"
         android:layout_marginBottom="108dp"
-        android:text="rotate"
+        android:text="rotate:\n20 points"
         android:backgroundTint="#6dcff6"
         android:radius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
