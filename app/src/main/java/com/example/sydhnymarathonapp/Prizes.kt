@@ -22,7 +22,7 @@ class Prizes: AppCompatActivity() {
 //    private lateinit var sizeMinusBtn: Button
     private lateinit var rotateBtn: Button
 
-    private val rouletteData = listOf("TCS", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
+    private val rouletteData = listOf("1", "2", "3", "4", "5", "6", "7", "8")
 
     private var rotationResult: String? = null
     private var resultText: String? = null

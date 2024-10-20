@@ -33,8 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:rouletteSize="6"
-        app:rouletteTextColor="@android:color/black"
+        app:rouletteSize="8"
+        app:rouletteTextColor="@android:color/white"
         app:rouletteTextSize="25sp"
         app:topMarkerColor="@color/black"
         app:topMarkerVisibility="invisible" />
