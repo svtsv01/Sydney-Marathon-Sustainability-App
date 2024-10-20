@@ -38,8 +38,9 @@ class MainActivity2 : ComponentActivity() {
         val chatGPTKey = "sk-proj-vE16jNFClJPOKD1CvYvQ1LAYo2tNN3NEgg3_WxYL0H0gBnTRYmJxTqcF5onajGVLDmQu0F" +
                 "wD2NT3BlbkFJKE50xJ7VdwJWKlmiF-CGYIs3NHLDrmVbyrNdCoBOTL8MUA08IXlt8R7HC82ovHRDpdL_2IrIQA"
 
-        val userMessage = "Identify the company that use barcode number ${barCodeNumber} and " +
-                "find out if this company sustainable and eco-friendly (Answer shortly and don't write the barcode number)." +
+        val userMessage = "Identify the company by barcode/QR number ${barCodeNumber} and " +
+                "find out if this company sustainable and eco-friendly. Answer shortly (Just day if company sustainable or not) " +
+                "and don't write the barcode number." +
                 "If you cannot identify company just say it."
 
         val messages = JSONArray()
