@@ -124,5 +124,11 @@ class MainActivity : AppCompatActivity() {
 
             constraintSet.applyTo(constraintLayout)
         }
+        val pointsDisplayTextView: TextView = findViewById(R.id.points_display)
+        updatePointsDisplay(pointsDisplayTextView)
+    }
+    private fun updatePointsDisplay(pointsDisplayTextView: TextView) {
+        val points = PointsManager.points
+        pointsDisplayTextView.text = "You have: $points points"
     }
 }
