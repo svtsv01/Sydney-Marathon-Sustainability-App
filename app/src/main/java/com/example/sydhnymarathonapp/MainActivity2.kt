@@ -19,8 +19,6 @@ class MainActivity2 : AppCompatActivity() {
             insets
         }
 
-
-        // Находим кнопку по ее ID
         val buttonScannerBack: Button = findViewById(R.id.button3)
 
         PointsManager.updateActionBarPoints(this)
