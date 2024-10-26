@@ -35,8 +35,7 @@ class MainActivity2 : ComponentActivity() {
     private fun getResponse(barCodeNumber: String)
     {
         val url = "https://api.openai.com/v1/chat/completions"
-        val chatGPTKey = "sk-proj-vE16jNFClJPOKD1CvYvQ1LAYo2tNN3NEgg3_WxYL0H0gBnTRYmJxTqcF5onajGVLDmQu0F" +
-                "wD2NT3BlbkFJKE50xJ7VdwJWKlmiF-CGYIs3NHLDrmVbyrNdCoBOTL8MUA08IXlt8R7HC82ovHRDpdL_2IrIQA"
+        val chatGPTKey = "bruh"
 
         val userMessage = "Identify the company by barcode/QR number ${barCodeNumber} and " +
                 "find out if this company sustainable and eco-friendly. Answer shortly (Just day if company sustainable or not) " +
