@@ -1,6 +1,6 @@
 # Sydney-Marathon-Sustainability-App
 
-This is a repository for a TCS Sustainothon submission by team Victorias Most Bitter. The solution is an Android mobile app written in Kotlin, designed for the Sydney Marathon to encourage the participants to make more environmentally-conscious decisions.
+This is a repository for a **TCS Sustainothon submission** by team Victorias Most Bitter. The solution is an Android mobile app written in Kotlin, designed for the Sydney Marathon to encourage the participants to make more environmentally-conscious decisions.
 
 Google drive link with presentation and video - https://drive.google.com/drive/folders/1WJyLYO8zGvdJbuok5Ea1W7jLoclMypZf?usp=sharing
 
